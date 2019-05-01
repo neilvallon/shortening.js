@@ -1,0 +1,24 @@
+{
+	"name": "shortening",
+	"version": "0.1.0",
+	"description": "Fat free URLs",
+	"license": "MIT",
+	"contributors": ["Neil Vallon <neil@vallon.me> (https://neil.vallon.me)"],
+
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/neilvallon/shortening.js"
+	},
+	"bugs": "https://github.com/neilvallon/shortening.js/issues",
+
+	"main": "index.js",
+	"scripts": {
+		"test": "mocha",
+		"bench": "node bench.js"
+	},
+
+	"devDependencies": {
+		"benchmark": "^2.1.4",
+		"mocha": "^6.1.4"
+	}
+}
