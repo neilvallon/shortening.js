@@ -1,9 +1,9 @@
 module.exports = function() {
-	const MAX_INT = 0x7FFFFFFF;
+	const MAX_INT = 0xFFFFFFFF;
 
 	function makeTable(cs) {
 		const t = new Array(256).fill(0xFF);
-		for (var i = 0; i < cs.length; i++) {
+		for (let i = 0; i < cs.length; i++) {
 			t[cs.charCodeAt(i)] = i;
 		}
 		return t;
@@ -27,18 +27,17 @@ module.exports = function() {
 
 	const splitCharSet32 = CharSet32.split("");
 	function Encode(n) {
-		if (!Number.isSafeInteger(n) || n < 0 || MAX_INT < n) {
+		if (!Number.isInteger(n) || n < 0 || MAX_INT < n) {
 			return undefined;
 		}
 
-		const l = Len(n);
-
+		let i = Len(n);
 		n -= min07;
 
-		var buf = "";
-		for (var i = l-1; 0 <= i; i--) {
+		let buf = "";
+		for (; 0 < i; i--) {
 			buf = splitCharSet32[n&31] + buf;
-			n >>= 5;
+			n >>>= 5;
 		}
 
 		return buf;
@@ -48,18 +47,18 @@ module.exports = function() {
 		if (b === null || b === undefined) return -1;
 		if (minTable.length < b.length || b.length == 0) return -1;
 
-		var n = 0;
-		var invalid = 0x00;
-		for (var i = 0; i < b.length; i++) {
+		let n = 0;
+		let invalid = 0x00;
+		for (let i = 0; i < b.length; i++) {
 			const ind = lookupTable[b.charCodeAt(i)&0xFF];
 			invalid |= ind;
-			n = n<<5 | ind;
+			n = n*32 + ind;
 		}
 
 		n += minTable[b.length-1]
 
 		if (invalid == 0xFF) return -2;
-		if (b.length == minTable.length && (n < 0 || MAX_INT < n)) return -3;
+		if (MAX_INT < n) return -3;
 
 		return n;
 	}

@@ -61,11 +61,24 @@ describe('Short32', function() {
 		});
 
 		it('correctly encodes MAX_INT', function() {
-			assert.equal(Short32.Encode(Short32.MAX_INT), "A666667");
+			assert.equal(Short32.Encode(Short32.MAX_INT), "C666667");
 		});
 
 		it('correctly handles place value rollover', function() {
 			rollover(Short32._cs, Short32._mt.slice(1), Short32);
+		});
+
+		it('returns undefined for bad input', function() {
+			assert.equal(Short32.Encode(Short32.MAX_INT+1), undefined);
+			assert.equal(Short32.Encode(-1), undefined);
+			assert.equal(Short32.Encode(1.5), undefined);
+			assert.equal(Short32.Encode(NaN), undefined);
+			assert.equal(Short32.Encode(Infinity), undefined);
+			assert.equal(Short32.Encode(undefined), undefined);
+			assert.equal(Short32.Encode(null), undefined);
+			assert.equal(Short32.Encode({}), undefined);
+			assert.equal(Short32.Encode([]), undefined);
+			assert.equal(Short32.Encode("0"), undefined);
 		});
 	});
 
@@ -75,14 +88,14 @@ describe('Short32', function() {
 		});
 
 		it('correctly decodes MAX_INT', function() {
-			assert.equal(Short32.Decode("A666667"), Short32.MAX_INT);
+			assert.equal(Short32.Decode("C666667"), Short32.MAX_INT);
 		});
 
 		const tests = [
 			{ ID: null,       Error: -1 },
 			{ ID: undefined,  Error: -1 },
 			{ ID: "",         Error: -1 },
-			{ ID: "A66667A",  Error: -3 },
+			{ ID: "C66667A",  Error: -3 },
 			{ ID: "AAAAAAAA", Error: -1 },
 			{ ID: "*",        Error: -2 },
 			{ ID: "\xFF",     Error: -2 },
@@ -109,11 +122,24 @@ describe('Short64', function() {
 		});
 
 		it('correctly encodes MAX_INT', function() {
-			assert.equal(Short64.Encode(Short64.MAX_INT), "A----_");
+			assert.equal(Short64.Encode(Short64.MAX_INT), "C----_");
 		});
 
 		it('correctly handles place value rollover', function() {
 			rollover(Short64._cs, Short64._mt.slice(1), Short64);
+		});
+
+		it('returns undefined for bad input', function() {
+			assert.equal(Short64.Encode(Short64.MAX_INT+1), undefined);
+			assert.equal(Short64.Encode(-1), undefined);
+			assert.equal(Short64.Encode(1.5), undefined);
+			assert.equal(Short64.Encode(NaN), undefined);
+			assert.equal(Short64.Encode(Infinity), undefined);
+			assert.equal(Short64.Encode(undefined), undefined);
+			assert.equal(Short64.Encode(null), undefined);
+			assert.equal(Short64.Encode({}), undefined);
+			assert.equal(Short64.Encode([]), undefined);
+			assert.equal(Short64.Encode("0"), undefined);
 		});
 	});
 
@@ -123,14 +149,14 @@ describe('Short64', function() {
 		});
 
 		it('correctly decodes MAX_INT', function() {
-			assert.equal(Short64.Decode("A----_"), Short64.MAX_INT);
+			assert.equal(Short64.Decode("C----_"), Short64.MAX_INT);
 		});
 
 		const tests = [
 			{ ID: null,      Error: -1 },
 			{ ID: undefined, Error: -1 },
 			{ ID: "",        Error: -1 },
-			{ ID: "A---_A",  Error: -3 },
+			{ ID: "C---_A",  Error: -3 },
 			{ ID: "AAAAAAA", Error: -1 },
 			{ ID: "*",       Error: -2 },
 			{ ID: "\xFF",    Error: -2 },

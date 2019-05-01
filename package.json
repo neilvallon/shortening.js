@@ -1,6 +1,6 @@
 {
 	"name": "shortening",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"description": "Fat free URLs",
 	"license": "MIT",
 	"contributors": ["Neil Vallon <neil@vallon.me> (https://neil.vallon.me)"],
@@ -20,5 +20,10 @@
 	"devDependencies": {
 		"benchmark": "^2.1.4",
 		"mocha": "^6.1.4"
-	}
+	},
+
+	"keywords": [
+		"base64", "base64url", "base32", "radix64", "radix32", "base", "radix", 
+		"bijective", "url", "encode", "decode", "convert"
+	]
 }
