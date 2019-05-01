@@ -1,6 +1,8 @@
 const assert = require('assert');
 const Shortening = require('./shortening');
 
+const MAX_INT = Shortening.MAX_INT;
+
 function rollover(charset, minTable, enc) {
 	for (var i = 0; i < minTable.length; i++) {
 		const a = enc.Encode(minTable[i] - 1)
@@ -40,12 +42,12 @@ function parity(s, c) {
 	});
 
 	it("last "+ c +" ids", function() {
-		for (var i = s.MAX_INT-c; i < s.MAX_INT; i++) assert.equal(s.Decode(s.Encode(i)), i);
+		for (var i = MAX_INT-c; i < MAX_INT; i++) assert.equal(s.Decode(s.Encode(i)), i);
 	});
 
 	it("random "+ c +" ids", function() {
 		for (var i = 0; i < c; i++) {
-			const v = Math.floor(Math.random() * s.MAX_INT)
+			const v = Math.floor(Math.random() * MAX_INT)
 			assert.equal(s.Decode(s.Encode(v)), v);
 		}
 	});
@@ -61,7 +63,7 @@ describe('Short32', function() {
 		});
 
 		it('correctly encodes MAX_INT', function() {
-			assert.equal(Short32.Encode(Short32.MAX_INT), "C666667");
+			assert.equal(Short32.Encode(MAX_INT), "C666667");
 		});
 
 		it('correctly handles place value rollover', function() {
@@ -69,7 +71,7 @@ describe('Short32', function() {
 		});
 
 		it('returns undefined for bad input', function() {
-			assert.equal(Short32.Encode(Short32.MAX_INT+1), undefined);
+			assert.equal(Short32.Encode(MAX_INT+1), undefined);
 			assert.equal(Short32.Encode(-1), undefined);
 			assert.equal(Short32.Encode(1.5), undefined);
 			assert.equal(Short32.Encode(NaN), undefined);
@@ -88,7 +90,7 @@ describe('Short32', function() {
 		});
 
 		it('correctly decodes MAX_INT', function() {
-			assert.equal(Short32.Decode("C666667"), Short32.MAX_INT);
+			assert.equal(Short32.Decode("C666667"), MAX_INT);
 		});
 
 		const tests = [
@@ -122,7 +124,7 @@ describe('Short64', function() {
 		});
 
 		it('correctly encodes MAX_INT', function() {
-			assert.equal(Short64.Encode(Short64.MAX_INT), "C----_");
+			assert.equal(Short64.Encode(MAX_INT), "C----_");
 		});
 
 		it('correctly handles place value rollover', function() {
@@ -130,7 +132,7 @@ describe('Short64', function() {
 		});
 
 		it('returns undefined for bad input', function() {
-			assert.equal(Short64.Encode(Short64.MAX_INT+1), undefined);
+			assert.equal(Short64.Encode(MAX_INT+1), undefined);
 			assert.equal(Short64.Encode(-1), undefined);
 			assert.equal(Short64.Encode(1.5), undefined);
 			assert.equal(Short64.Encode(NaN), undefined);
@@ -149,7 +151,7 @@ describe('Short64', function() {
 		});
 
 		it('correctly decodes MAX_INT', function() {
-			assert.equal(Short64.Decode("C----_"), Short64.MAX_INT);
+			assert.equal(Short64.Decode("C----_"), MAX_INT);
 		});
 
 		const tests = [
