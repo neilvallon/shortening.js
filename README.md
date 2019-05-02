@@ -32,3 +32,22 @@ shortening.Std32.Decode("SHORT"); // 20201043
 shortening.Std64.Decode("SHORT"); // 320926867
 shortening.Std64.Decode("");      // -1
 ```
+
+## Performance
+```
+Average over 10 exhaustive Encode+Decode tests:
+Std32
+13m27.431s / 2^32 = 187.995ns
+Std64
+11m40.858s / 2^32 = 163.181ns
+
+$ npm run bench
+Short32.Encode 135.95 ns/op
+Short32.Encode x 7,355,856 ops/sec ±0.28% (90 runs sampled)
+Short32.Decode 51.38 ns/op
+Short32.Decode x 19,461,627 ops/sec ±0.30% (93 runs sampled)
+Short64.Encode 115.87 ns/op
+Short64.Encode x 8,630,543 ops/sec ±0.24% (93 runs sampled)
+Short64.Decode 46.02 ns/op
+Short64.Decode x 21,731,742 ops/sec ±0.16% (94 runs sampled)
+```
