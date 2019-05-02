@@ -1,27 +1,27 @@
 const MAX_INT = 0xFFFFFFFF;
 
-function makeTable(cs) {
-	const t = new Array(256).fill(0xFF);
-	for (let i = 0; i < cs.length; i++) {
-		t[cs.charCodeAt(i)] = i;
-	}
-	return t;
-}
-
-function makeMinTable(base) {
-	const tbl = [0];
-	for (let i = 1; ; i++) {
-		const n = (tbl[i-1] + 1) * base;
-		if (MAX_INT < n) break;
-		tbl.push(n);
-	}
-	return tbl
-}
-
 function New(charSet) {
 	const base = charSet.length;
 	if (base != 32 && base != 64) {
 		throw "only base64 or base32 supported";
+	}
+
+	function makeTable(cs) {
+		const t = new Array(256).fill(0xFF);
+		for (let i = 0; i < cs.length; i++) {
+			t[cs.charCodeAt(i)] = i;
+		}
+		return t;
+	}
+
+	function makeMinTable(base) {
+		const tbl = [0];
+		for (let i = 1; ; i++) {
+			const n = (tbl[i-1] + 1) * base;
+			if (MAX_INT < n) break;
+			tbl.push(n);
+		}
+		return tbl
 	}
 
 	const offset = (base == 32)? 5:6;
