@@ -42,13 +42,12 @@ function New(charSet) {
 			return undefined;
 		}
 
-		let i = Len(n);
+		let i = Len(n)-1;
 		n -= maxmin;
 
 		let buf = "";
-		for (; 0 < i; i--) {
-			buf = splitCharSet[n&(base-1)] + buf;
-			n >>>= offset;
+		for (; 0 <= i; i--) {
+			buf += splitCharSet[(n>>>(offset*i))&(base-1)];
 		}
 
 		return buf;
