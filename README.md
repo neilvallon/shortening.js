@@ -34,20 +34,19 @@ shortening.Std64.Decode("");      // -1
 ```
 
 ## Performance
+* Node v12.1.0
+* Intel Xeon X5675 - 3.06 GHz
+
 ```
-Average over 10 exhaustive Encode+Decode tests:
+Exhaustive Encode+Decode test:
 Std32
-13m27.431s / 2^32 = 187.995ns
+11m13.84s / 2^32 = 156.9ns
 Std64
-11m40.858s / 2^32 = 163.181ns
+10m11.24s / 2^32 = 142.3ns
 
 $ npm run bench
-Short32.Encode 135.95 ns/op
-Short32.Encode x 7,355,856 ops/sec ±0.28% (90 runs sampled)
-Short32.Decode 51.38 ns/op
-Short32.Decode x 19,461,627 ops/sec ±0.30% (93 runs sampled)
-Short64.Encode 115.87 ns/op
-Short64.Encode x 8,630,543 ops/sec ±0.24% (93 runs sampled)
-Short64.Decode 46.02 ns/op
-Short64.Decode x 21,731,742 ops/sec ±0.16% (94 runs sampled)
+Std32.Encode   119ns ± 1%
+Std32.Decode  49.6ns ± 1%
+Std64.Encode  98.4ns ± 1%
+Std64.Decode  45.2ns ± 0%
 ```
